@@ -30,5 +30,4 @@ Direitos Autorais e Licença
 
 Copyright 2025 Carlos Gutierre
 
-MPB está sob os termos da GNU General Public License, versão 3.0 ou, a seu critério, qualquer versão posterior.
-
+Você pode modificar e redistribuir este programa que está sob os termos da GNU General Public License, versão 3.0 ou, a seu critério, qualquer versão posterior.
