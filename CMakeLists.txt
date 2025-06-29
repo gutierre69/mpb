@@ -12,5 +12,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Quick Widgets Multimedia MultimediaWidgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Quick Widgets Multimedia MultimediaWidgets)
 
-# Adicione o diretório de código-fonte
 add_subdirectory(src)

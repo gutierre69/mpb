@@ -23,7 +23,6 @@ void Waveform::setWaveform(const QVector<float> &data)
 {
     waveform = data;
 
-    // --- Pré-processa em barras visuais fixas ---
     const int barWidth = 3;
     const int gap = 1;
     const int totalBars = width() / (barWidth + gap);
@@ -39,7 +38,7 @@ void Waveform::setWaveform(const QVector<float> &data)
             if (idx < waveform.size())
                 maxVal = std::max(maxVal, waveform[idx]);
         }
-        // aplica curva logarítmica aqui, uma vez só
+
         precomputed.push_back(std::pow(maxVal, 0.6f));
     }
 
