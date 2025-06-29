@@ -20,10 +20,18 @@ Requisitos
 
 [FFMPEG](https://ffmpeg.org/)
 
+
+Baixe o AppImage
+----------------
+
+Se quiser usar não precisa nem compilar, baixe a última versão em [releases](https://github.com/gutierre69/mpb/releases).
+
+
+
 Ícones
 ------
 
-Os ícones usados no projeto são de [Icons8](https://icons8.com), exceto o ícone da aplicação que é de [Icon-Icons](https://icon-icons.com/)
+Os ícones usados no projeto são de [Icons8](https://icons8.com), exceto o ícone da aplicação que é de [Icon-Icons](https://icon-icons.com/).
 
 Direitos Autorais e Licença
 ---------------------------
