@@ -1,6 +1,7 @@
-# MPB
+MPB
+===
 
-![MPB Icon](./src/icons/mpb-512.png)
+![MPB Icon](./data/mpb-128.png)
 
 A idéia é criar um tocar de áudio simples, que funcione em background e com ícone de fácil acesso na bandeja.
 
@@ -12,17 +13,20 @@ Testado e aprovado em Debian e derivados.
 
 Suporta: mp3, mp4, wav, flac, ogg e wma.
 
-### Requisitos
+Requisitos
+----------
 
 [QT6+](https://qt.io/)
 
 [FFMPEG](https://ffmpeg.org/)
 
-### Ícones
+Ícones
+------
 
 Os ícones usados no projeto são de [Icons8](https://icons8.com), exceto o ícone da aplicação que é de [Icon-Icons](https://icon-icons.com/)
 
-### Direitos Autorais e Licença
+Direitos Autorais e Licença
+---------------------------
 
 Copyright 2025 Carlos Gutierre
 
