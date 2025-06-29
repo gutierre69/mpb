@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>icons/icons8-audio-64.png</file>
+        <file>icons/icons8-go-to-end-64.png</file>
+        <file>icons/icons8-go-to-start-64.png</file>
+        <file>icons/icons8-menu-64.png</file>
+        <file>icons/icons8-menu-squared-64.png</file>
+        <file>icons/icons8-mute-64.png</file>
+        <file>icons/icons8-pause-64.png</file>
+        <file>icons/icons8-play-64.png</file>
+        <file>icons/icons8-repeat-64.png</file>
+        <file>icons/icons8-repeat-one-64.png</file>
+        <file>icons/icons8-shuffle-64.png</file>
+        <file>icons/icons8-stop-64.png</file>
+        <file>icons/icons8-close-64.png</file>
+        <file>icons/icons8-folder-64.png</file>
+        <file>style.qss</file>
+        <file>icons/icons8-help-64.png</file>
+        <file>icons/mpb-512.png</file>
+    </qresource>
+</RCC>
