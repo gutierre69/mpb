@@ -1,6 +1,6 @@
 # MPB
 
-![MPB Icon](./src/icons/mpb-512.png =50x50)
+![MPB Icon](./src/icons/mpb-512.png)
 
 A idéia é criar um tocar de áudio simples, que funcione em background e com ícone de fácil acesso na bandeja.
 
