@@ -13,12 +13,14 @@ Testado e aprovado em Debian e derivados.
 
 Suporta: mp3, mp4, wav, flac, ogg e wma.
 
-Requisitos
-----------
+Requisitos e Bibliotecas
+------------------------
 
 [QT6+](https://qt.io/)
 
 [FFMPEG](https://ffmpeg.org/)
+
+[TagLib](https://taglib.org/)
 
 
 Baixe o AppImage
