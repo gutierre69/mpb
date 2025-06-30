@@ -33,10 +33,17 @@ MainWindow::MainWindow(QWidget *parent)
     trayIcon->setToolTip("TocaE");
 
     trayMenu = new QMenu(this);
-    QAction *restoreAction = new QAction(tr("Restaurar"), this);
-    QAction *quitAction = new QAction(tr("Sair"), this);
+
+    restoreAction = new QAction(tr("Restaurar"), this);
+    playAction = new QAction(QIcon(":/images/icons/icons8-play-64.png"), tr("Play"), this);
+    muteAction = new QAction(QIcon(":/images/icons/icons8-mute-64.png"),tr("Silenciar"), this);
+    quitAction = new QAction(tr("Sair"), this);
 
     trayMenu->addAction(restoreAction);
+    trayMenu->addSeparator();
+    trayMenu->addAction(playAction);
+    trayMenu->addAction(muteAction);
+    trayMenu->addSeparator();
     trayMenu->addAction(quitAction);
     trayIcon->setContextMenu(trayMenu);
     trayIcon->show();
@@ -120,6 +127,8 @@ MainWindow::MainWindow(QWidget *parent)
         this->activateWindow();
     });
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
+    connect(playAction, &QAction::triggered, this, &MainWindow::playPause);
+    connect(muteAction, &QAction::triggered, this, &MainWindow::muteVolume);
     connect(trayIcon, &QSystemTrayIcon::activated, this, &MainWindow::trayIconActivated);
 
     processFolder( settings->value("interface/folder").toString() );
@@ -150,11 +159,15 @@ void MainWindow::muteVolume()
         ui->volume->setValue( player->getVolume() * 100 );
         ui->btnMute->setStyleSheet("");
         Mute = false;
+        muteAction->setIcon( QIcon(":/images/icons/icons8-mute-64.png") );
+        muteAction->setText(tr("Silenciar"));
     } else if(!Mute){
         player->setVolume( 0 );
         ui->volume->setEnabled(false);
         ui->volume->setValue( player->getVolume() * 100 );
         ui->btnMute->setStyleSheet("background-color: rgba(255,0,0,0.2);");
+        muteAction->setIcon( QIcon(":/images/icons/icons8-audio-64.png") );
+        muteAction->setText(tr("Normalizar"));
         Mute = true;
     }
 }
@@ -165,11 +178,15 @@ void MainWindow::playPause()
         return;
 
     if(player->isPlaying()) {
-        ui->btnPlay->setIcon(QIcon(":/images/icons/icons8-play-64.png"));
+        ui->btnPlay->setIcon( QIcon(":/images/icons/icons8-play-64.png") );
+        playAction->setIcon( QIcon(":/images/icons/icons8-play-64.png") );
+        playAction->setText("Tocar");
         player->Pause();
         Playing = false;
     } else {
-        ui->btnPlay->setIcon(QIcon(":/images/icons/icons8-pause-64.png"));
+        ui->btnPlay->setIcon( QIcon(":/images/icons/icons8-pause-64.png") );
+        playAction->setIcon( QIcon(":/images/icons/icons8-pause-64.png") );
+        playAction->setText("Parar");
         player->Play();
         Playing = true;
     }
@@ -266,7 +283,6 @@ void MainWindow::processFolder(QString path)
     }
 
     if (!audioFiles.isEmpty()) {
-
         for(int i=0; i<audioFiles.size(); i++){
             QString selectedFile = audioFiles.at(i);
             playlist.push_back({ selectedFile });

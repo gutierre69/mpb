@@ -85,6 +85,11 @@ class MainWindow : public QMainWindow
 
         std::vector<QString> playlist;
 
+        QAction *restoreAction;
+        QAction *playAction;
+        QAction *muteAction;
+        QAction *quitAction;
+
         QSettings *settings;
 
         bool Playing = false;
