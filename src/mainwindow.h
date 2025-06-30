@@ -14,6 +14,7 @@
 #include <QSettings>
 #include <QTimer>
 #include <QDirIterator>
+#include <QRandomGenerator>
 
 #include <QCloseEvent>
 #include <QFocusEvent>
@@ -71,6 +72,9 @@ class MainWindow : public QMainWindow
         void playPause();
         void muteVolume();
         void showAboutDialog();
+        void repeatType();
+        void statusChanged(QMediaPlayer::MediaStatus state);
+        void shuffle();
 
         QPoint m_dragPosition;
 

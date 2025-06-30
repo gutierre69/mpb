@@ -50,6 +50,16 @@ QPushButton#btnAbout {
     border-radius: 12px;
 }
 
+/* --- shuffle --- */
+QPushButton#btnShuffle {
+    border-radius: 12px;
+}
+
+/* --- repeat --- */
+QPushButton#btnRepeat {
+    border-radius: 12px;
+}
+
 QLabel#music_title, QLabel#artist_name {
     color: #ffffff;
 }

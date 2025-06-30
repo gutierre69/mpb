@@ -19,6 +19,12 @@ MainWindow::MainWindow(QWidget *parent)
     if(!settings->contains("interface/volume"))
         settings->setValue("interface/volume", player->getVolume());
 
+    if(!settings->contains("interface/repeatType"))
+        settings->setValue("interface/repeatType", "normal");
+
+    if(!settings->contains("interface/shuffle"))
+        settings->setValue("interface/shuffle", "no");
+
     waveform = new Waveform(this);
     waveform->setGeometry(50, 40, 300, 60);
     waveform->setStyleSheet("background-color: transparent;");
@@ -60,6 +66,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->btnPlay->setIcon(QIcon(":/images/icons/icons8-play-64.png"));
     ui->btnPlay->setIconSize(QSize(15, 15));
 
+    ui->btnRepeat->move(90,193);
+    ui->btnRepeat->setText("");
+    ui->btnRepeat->setFixedSize(25, 25);
+    if(settings->value("interface/repeatType").toString()=="normal") ui->btnRepeat->setIcon(QIcon(":/images/icons/icons8-repeat-64.png"));
+    if(settings->value("interface/repeatType").toString()=="one") ui->btnRepeat->setIcon(QIcon(":/images/icons/icons8-repeat-one-64.png"));
+    ui->btnRepeat->setIconSize(QSize(15, 15));
+
     ui->btnPrevious->move(125,185);
     ui->btnPrevious->setText("");
     ui->btnPrevious->setFixedSize(40, 40);
@@ -71,6 +84,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->btnNext->setFixedSize(40, 40);
     ui->btnNext->setIcon(QIcon(":/images/icons/icons8-go-to-end-64.png"));
     ui->btnNext->setIconSize(QSize(15, 15));
+
+    ui->btnShuffle->move(285,193);
+    ui->btnShuffle->setText("");
+    ui->btnShuffle->setFixedSize(25, 25);
+    ui->btnShuffle->setIcon(QIcon(":/images/icons/icons8-shuffle-64.png"));
+    ui->btnShuffle->setIconSize(QSize(15, 15));
+    if(settings->value("interface/shuffle").toString()=="yes") ui->btnShuffle->setStyleSheet("background-color: #00a1ff;");
 
     ui->btnMenu->move(350,185);
     ui->btnMenu->setText("");
@@ -107,15 +127,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->btnPrevious, &QPushButton::clicked, this, &MainWindow::previous);
     connect(ui->btnNext, &QPushButton::clicked, this, &MainWindow::next);
     connect(ui->btnAbout, &QPushButton::clicked, this, &MainWindow::showAboutDialog);
+    connect(ui->btnRepeat, &QPushButton::clicked, this, &MainWindow::repeatType);
+    connect(ui->btnShuffle, &QPushButton::clicked, this, &MainWindow::shuffle);
 
     connect(player, &AudioPlayer::loadedMedia, this, &MainWindow::audioInfo);
     connect(player, &AudioPlayer::haveWaveform, waveform, &Waveform::setWaveform);
     connect(player, &AudioPlayer::update_position, this, &MainWindow::currentPosition);
-    connect(player, &AudioPlayer::statusChanged, this, [=](QMediaPlayer::MediaStatus state) {
-        if(state==QMediaPlayer::EndOfMedia && Playing){
-            next();
-        }
-    });
+    connect(player, &AudioPlayer::statusChanged, this, &MainWindow::statusChanged);
     connect(waveform, &Waveform::seekRequested, this, [=](qint64 pos) {
         player->Seek(pos);
     });
@@ -149,6 +167,40 @@ MainWindow::~MainWindow()
     delete waveform;
     delete player;
     delete ui;
+}
+
+void MainWindow::shuffle()
+{
+    if(settings->value("interface/shuffle").toString()=="no"){
+        ui->btnShuffle->setStyleSheet("background-color: #00a1ff;");
+        settings->setValue("interface/shuffle", "yes");
+    } else if(settings->value("interface/shuffle").toString()=="yes"){
+        ui->btnShuffle->setStyleSheet("");
+        settings->setValue("interface/shuffle", "no");
+    }
+}
+
+void MainWindow::repeatType()
+{
+    if(settings->value("interface/repeatType").toString()=="normal"){
+        ui->btnRepeat->setIcon( QIcon(":/images/icons/icons8-repeat-one-64.png") );
+        settings->setValue("interface/repeatType", "one");
+    } else if(settings->value("interface/repeatType").toString()=="one"){
+        ui->btnRepeat->setIcon( QIcon(":/images/icons/icons8-repeat-64.png") );
+        settings->setValue("interface/repeatType", "normal");
+    }
+}
+
+void MainWindow::statusChanged(QMediaPlayer::MediaStatus state)
+{
+    if(state==QMediaPlayer::EndOfMedia && Playing){
+        if(settings->value("interface/repeatType").toString()=="normal"){
+            next();
+        } else if(settings->value("interface/repeatType").toString()=="one"){
+            player->Stop();
+            player->Play();
+        }
+    }
 }
 
 void MainWindow::muteVolume()
@@ -305,9 +357,13 @@ void MainWindow::previous()
 
     if(Playing) player->Stop();
 
-    current -= 1;
-    if(current<0)
-        current = playlist.size()-1;
+    if(settings->value("interface/shuffle").toString()=="no"){
+        current -= 1;
+        if(current<0)
+            current = playlist.size()-1;
+    } else if(settings->value("interface/shuffle").toString()=="yes"){
+        current = QRandomGenerator::global()->bounded( static_cast<int>(playlist.size()) );
+    }
 
     player->addMedia( playlist.at(current) );
     if(Playing) player->Play();
@@ -322,9 +378,13 @@ void MainWindow::next()
 
     if(Playing) player->Stop();
 
-    current += 1;
-    if(current>playlist.size()-1)
-        current = 0;
+    if(settings->value("interface/shuffle").toString()=="no"){
+        current += 1;
+        if(current>playlist.size()-1)
+            current = 0;
+    } else if(settings->value("interface/shuffle").toString()=="yes"){
+        current = QRandomGenerator::global()->bounded( static_cast<int>(playlist.size()) );
+    }
 
     player->addMedia( playlist.at(current)  );
     if(Playing) player->Play();
