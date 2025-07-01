@@ -26,7 +26,7 @@ class AboutDialog : public QDialog
     private:
         Ui::AboutDialog *ui;
 
-        QString version = "0.1.2";
+        QString version = "0.1.3";
 };
 
 #endif // ABOUTDIALOG_H
