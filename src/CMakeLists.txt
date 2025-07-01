@@ -11,7 +11,7 @@ set(PROJECT_SOURCES
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(MPB
+    qt_add_executable(mpb
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         resources.qrc
@@ -22,13 +22,13 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     )
 else()
     if(ANDROID)
-        add_library(MPB SHARED ${PROJECT_SOURCES})
+        add_library(mpb SHARED ${PROJECT_SOURCES})
     else()
-        add_executable(MPB ${PROJECT_SOURCES})
+        add_executable(mpb ${PROJECT_SOURCES})
     endif()
 endif()
 
-target_link_libraries(MPB
+target_link_libraries(mpb
     PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::Quick
@@ -37,7 +37,7 @@ target_link_libraries(MPB
     tag
 )
 
-set_target_properties(MPB PROPERTIES
+set_target_properties(mpb PROPERTIES
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
     MACOSX_BUNDLE_GUI_IDENTIFIER com.example.tocaE
@@ -45,13 +45,13 @@ set_target_properties(MPB PROPERTIES
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
 )
 
-install(TARGETS MPB
+install(TARGETS mpb
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(MPB)
+    qt_finalize_executable(mpb)
 endif()
 

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=MPB
+Comment=Um player de música elegante e simples para Linux
+Exec=mpb
+Icon=mpb
+Terminal=false
+Type=Application
+Categories=AudioVideo;Player;Qt;
+StartupNotify=true

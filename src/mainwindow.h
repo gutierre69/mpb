@@ -76,7 +76,7 @@ class MainWindow : public QMainWindow
         void statusChanged(QMediaPlayer::MediaStatus state);
         void shuffle();
 
-        QPoint m_dragPosition;
+        QPoint mousedragPosition;
 
         Ui::MainWindow *ui;
 

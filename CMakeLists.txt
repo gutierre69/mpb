@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(MPB VERSION 0.1 LANGUAGES CXX)
+project(mpb VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -13,3 +13,7 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Quick Widgets Multimedia Multi
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Quick Widgets Multimedia MultimediaWidgets)
 
 add_subdirectory(src)
+
+install(FILES mpb.desktop DESTINATION share/applications)
+install(FILES data/icons/hicolor/512x512/apps/mpb.png DESTINATION share/icons/hicolor/512x512/apps)
+
