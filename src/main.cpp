@@ -30,14 +30,14 @@ int main(int argc, char *argv[])
     }
 
     MainWindow w;
-    QScreen *screen = QApplication::primaryScreen();
-    if (screen) {
-        QRect screenRect = screen->geometry();
+    // QScreen *screen = QApplication::primaryScreen();
+    // if (screen) {
+    //     QRect screenRect = screen->geometry();
 
-        int x = (screenRect.right()/2) - (w.width()/2);
-        int y = screenRect.top()+50;
-        w.move(x, y);
-    }
+    //     int x = (screenRect.right()/2) - (w.width()/2);
+    //     int y = screenRect.top()+50;
+    //     w.move(x, y);
+    // }
 
     w.show();
     return a.exec();

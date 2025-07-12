@@ -9,7 +9,9 @@ Selecione um diretório com suas músicas, dê play e seja feliz!
 
 ![MPB Icon](./data/screenshot-02.png)
 
-![MPB System tray](./data/system-tray.png)
+![MPB KDE Plasma System Tray](./data/system-tray-kde.png)
+
+![MPB Gnome System tray](./data/system-tray-gnome.png)
 
 Testado e aprovado em Debian e derivados.
 

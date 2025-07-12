@@ -9,9 +9,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setFixedSize(400, 240);
+
     this->window()->setWindowTitle("MPB");
-    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Window);
+    this->setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::Window);
     this->setAttribute(Qt::WA_TranslucentBackground);
+    this->setEnabled(true);
 
     player = new AudioPlayer;
 
@@ -36,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     trayIcon = new QSystemTrayIcon(this);
     trayIcon->setIcon(QIcon(":/images/icons/icons8-play-64.png"));
-    trayIcon->setToolTip("TocaE");
+    trayIcon->setToolTip("MPB");
 
     trayMenu = new QMenu(this);
 
@@ -397,8 +399,6 @@ void MainWindow::closeEvent(QCloseEvent *event) {
     if (trayIcon->isVisible()) {
         hide();
         event->ignore();
-
-        //trayIcon->showMessage(tr("Minimizado"), tr("Clique 2x para restaurar"), QSystemTrayIcon::Information, 0);
     } else {
         event->accept();
     }
@@ -419,6 +419,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton) {
         mousedragPosition = (event->globalPosition() - frameGeometry().topLeft()).toPoint();
         event->accept();
+        return;
     }
     QWidget::mousePressEvent(event);
 }
@@ -426,8 +427,9 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
     if (event->buttons() & Qt::LeftButton) {
-        move((event->globalPosition() - mousedragPosition).toPoint());
+        move( (event->globalPosition() - mousedragPosition).toPoint() );
         event->accept();
+        return;
     }
     QWidget::mouseMoveEvent(event);
 }
