@@ -398,7 +398,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
         hide();
         event->ignore();
 
-        trayIcon->showMessage(tr("Minimizado"), tr("Clique 2x para restaurar"), QSystemTrayIcon::Information, 0);
+        //trayIcon->showMessage(tr("Minimizado"), tr("Clique 2x para restaurar"), QSystemTrayIcon::Information, 0);
     } else {
         event->accept();
     }
