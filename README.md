@@ -9,6 +9,8 @@ Selecione um diretório com suas músicas, dê play e seja feliz!
 
 ![MPB Icon](./data/screenshot-02.png)
 
+![MPB System tray](./data/system-tray.png)
+
 Testado e aprovado em Debian e derivados.
 
 Suporta: mp3, mp4, wav, flac, ogg e wma.
